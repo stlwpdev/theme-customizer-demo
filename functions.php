@@ -228,4 +228,59 @@ function joints_comments($comment, $args, $depth) {
 	<!-- </li> is added by WordPress automatically -->
 <?php
 } // don't remove this bracket!
+
+
+// Add theme customizer settings, sections and controls
+function tcd_customize_register($wp_customize){
+	// Register settings and give default values
+	$wp_customize->add_setting('sidebar_position', array(
+		'default' => 'right'
+	));
+
+	$wp_customize->add_setting('background_color', array(
+		'default' => 'FFFFFF'
+	));
+
+	$wp_customize->add_setting('logo', array(
+		'default' => ''
+	));
+
+	// Add sections to theme customizer
+	$wp_customize->add_section('tcd_sidebar' , array(
+    	'title' => __( 'Sidebar', 'foundation-test' ),
+    	'priority' => 30,
+	));
+
+	$wp_customize->add_section('tcd_styling', array(
+		'title' => __('Styling', 'theme-customizer-demo'),
+		'priority' => 40,
+	));
+
+	// Add controls that map to settings and sections listed above
+	$wp_customize->add_control('sidebar_position',
+		array(
+			'label' => __( 'Position', 'theme-customizer-demo' ),
+			'section' => 'tcd_sidebar',
+			'settings' => 'sidebar_position',
+			'type' => 'select',
+			'choices'  => array(
+				'left' => __('Left'),
+				'right' => __('Right'),
+			)
+		)
+	);
+
+	$wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'background_color', array(
+		'label' => __( 'Background Color', 'theme-customizer-demo' ),
+		'section' => 'tcd_styling',
+		'settings' => 'background_color',
+	)));
+
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'logo', array(
+		'label' => __('Logo', 'theme-customizer-demo'),
+		'section' => 'tcd_styling',
+		'settings' => 'logo'
+	)));
+}
+add_action('customize_register', 'tcd_customize_register');
 ?>

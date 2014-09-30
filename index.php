@@ -3,7 +3,11 @@
 			<div id="content">
 			
 				<div id="inner-content" class="row clearfix">
-			
+					
+					<?php if(get_theme_mod('sidebar_position') == 'left'){ ?>
+					<?php get_sidebar(); ?>
+					<?php } ?>
+
 				    <div id="main" class="large-8 medium-8 columns clearfix" role="main">
 
 					    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -32,7 +36,9 @@
 			
 				    </div> <!-- end #main -->
     
-				    <?php get_sidebar(); ?>
+				    <?php if(get_theme_mod('sidebar_position') == 'right'){ ?>
+					<?php get_sidebar(); ?>
+					<?php } ?>
 				    
 				</div> <!-- end #inner-content -->
     

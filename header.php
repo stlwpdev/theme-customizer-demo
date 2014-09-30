@@ -34,6 +34,11 @@
 		<!-- Drop Google Analytics here -->
 		<!-- end analytics -->
 
+		<style>
+			body {
+				background-color: #<?php echo get_theme_mod('background_color'); ?>;
+			}
+		</style>
 	</head>
 
 	<body <?php body_class(); ?>>
@@ -46,8 +51,18 @@
 	
 					<div id="inner-header" class="row">
 						<div class="large-12 columns">
-							<h1><a href="<?php echo home_url(); ?>" rel="nofollow"><?php bloginfo('name'); ?></a>
-							<small><?php  bloginfo('description'); ?></small></h1>
+							<?php
+								$logo = get_theme_mod('logo');
+							?>
+							<h1>
+								<a href="<?php echo home_url(); ?>" rel="nofollow">
+									<?php if($logo != ''){ ?>
+									<img src="<?php echo $logo; ?>" />
+									<?php } ?>
+									<?php bloginfo('name'); ?>
+								</a>
+								<small><?php  bloginfo('description'); ?></small>
+							</h1>
 						</div>					
 						
 						 <?php // get_template_part( 'partials/nav', 'offcanvas' ); ?> 
